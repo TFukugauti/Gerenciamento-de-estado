@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_tasks/core/constants/colors.dart';
+import 'package:my_tasks/presentation/add_tasks/add_tasks.dart';
 
 class MyTasks extends StatelessWidget {
   const MyTasks({super.key});
@@ -41,7 +42,7 @@ class MyTasks extends StatelessWidget {
                   child: FloatingActionButton(
                     onPressed: () => showModalBottomSheet(
                       context: context,
-                      builder: (context) => Container(),
+                      builder: (context) => const AddTasks(),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(40),
