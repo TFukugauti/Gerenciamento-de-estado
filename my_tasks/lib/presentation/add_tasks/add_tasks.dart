@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_tasks/bloc/my_task_bloc.dart';
 import 'package:my_tasks/core/constants/colors.dart';
+import 'package:my_tasks/data/model/tasks_model.dart';
+import 'package:my_tasks/main.dart';
 
 class AddTasks extends StatefulWidget {
   const AddTasks({super.key});
@@ -63,7 +66,15 @@ class _AddTasksState extends State<AddTasks> {
                   height: 50,
                   width: 50,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      bloc.add(
+                        MyTaskAdded(
+                          tasksModel:
+                              TasksModel(taskTitle.text, taskDescription.text),
+                        ),
+                      );
+                      Navigator.of(context).pop();
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: MYTasksColors.rosa,
                       shape: const RoundedRectangleBorder(

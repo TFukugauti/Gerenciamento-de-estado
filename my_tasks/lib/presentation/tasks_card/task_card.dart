@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_tasks/core/constants/colors.dart';
 import 'package:my_tasks/data/model/tasks_model.dart';
+import 'package:my_tasks/presentation/remove_task/remove_task.dart';
 
 class TaskCard extends StatelessWidget {
-  TaskCard({super.key, required this.tasks});
+  TaskCard({super.key, required this.tasksModel});
 
-  final TasksModel tasks;
+  final TasksModel tasksModel;
   final now = DateTime.now();
 
   @override
@@ -31,7 +32,7 @@ class TaskCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    tasks.title,
+                    tasksModel.title,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
@@ -46,7 +47,8 @@ class TaskCard extends StatelessWidget {
                       child: IconButton(
                         onPressed: () => showBottomSheet(
                           context: context,
-                          builder: (context) => Container(),
+                          builder: (context) =>
+                              RemoveTask(tasksModel: tasksModel),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(40),
@@ -61,7 +63,7 @@ class TaskCard extends StatelessWidget {
                 ],
               ),
               Text(
-                tasks.description,
+                tasksModel.description,
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14,

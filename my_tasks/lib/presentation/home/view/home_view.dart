@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_tasks/bloc/my_task_bloc.dart';
 import 'package:my_tasks/core/constants/colors.dart';
+import 'package:my_tasks/data/model/tasks_model.dart';
+import 'package:my_tasks/main.dart';
 import 'package:my_tasks/presentation/add_tasks/add_tasks.dart';
+import 'package:my_tasks/presentation/tasks_card/task_card.dart';
 
 class MyTasks extends StatelessWidget {
   const MyTasks({super.key});
@@ -27,10 +32,19 @@ class MyTasks extends StatelessWidget {
               Column(
                 children: [
                   Expanded(
-                      child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Container();
+                      child: BlocBuilder<MyTasksBloc, MyTasksState>(
+                    bloc: bloc,
+                    builder: (context, state) {
+                      return ListView.builder(
+                        itemCount: state.tasksModel.length,
+                        itemBuilder: (context, index) {
+                          final tasks = state.tasksModel[index];
+                          return TaskCard(
+                            tasksModel:
+                                TasksModel(tasks.title, tasks.description),
+                          );
+                        },
+                      );
                     },
                   ))
                 ],

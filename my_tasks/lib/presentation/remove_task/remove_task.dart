@@ -1,27 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:my_tasks/bloc/my_task_bloc.dart';
 import 'package:my_tasks/core/constants/colors.dart';
 import 'package:my_tasks/data/model/tasks_model.dart';
+import 'package:my_tasks/main.dart';
 
 class RemoveTask extends StatelessWidget {
-  const RemoveTask({super.key, required this.tasks});
+  const RemoveTask({super.key, required this.tasksModel});
 
-  final TasksModel tasks;
+  final TasksModel tasksModel;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 174,
-      width: 428,
+      height: 200,
+      width: double.maxFinite,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(75, 28, 75, 28),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Deseja remover "${tasks.title}"?',
+              'Deseja remover "${tasksModel.title}"?',
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w600,
@@ -37,7 +36,10 @@ class RemoveTask extends StatelessWidget {
                   height: 50,
                   width: 50,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      bloc.add(MyTaskRemoved(tasksModel: tasksModel));
+                      Navigator.of(context).pop();
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: MYTasksColors.verde,
                       shape: const RoundedRectangleBorder(
@@ -60,7 +62,9 @@ class RemoveTask extends StatelessWidget {
                   height: 50,
                   width: 50,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: MYTasksColors.vermelho,
                       shape: const RoundedRectangleBorder(
